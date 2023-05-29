@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- 로그가 저장될 경로 설정 -->
+	<property name="LOGS_PATH" value="d:/javaworks/logs" />
+	
+	<!-- CONSOLE 로그 설정 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				콘솔로그: %d{yyyy-MM-dd, HH:mm:ss:SSS}: 쓰레드: [%thread{25}] 로거: [%logger{20}] 메세지: %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- FILE 로그 설정 -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>
+				파일로그: %d{yyyy-MM-dd, HH:mm:ss} 쓰레드: [%thread] 로거: [%logger] 메세지: %msg%n
+			</pattern>
+		</encoder>
+		
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOGS_PATH}/logList_%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+			<maxFileSize>3KB</maxFileSize>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+	
+	<!-- springframework 관련 로그 -->
+	<logger name="org.springframework" level="info" />
+	<!-- com.javalab.login 패키지 관련 로그 -->
+	<logger name="com.javalab.login">
+		<level value="info" />
+	</logger>	
+	
+	<!-- SQL 관련 설정 -->
+	<logger name="jdbc.sqlonly" level="OFF" />
+	<logger name="jdbc.sqltiming" level="DEBUG" />
+	<logger name="jdbc.audit" level="OFF"/>
+	<logger name="jdbc.resultset" level="OFF" />
+	
+	
+	<!-- appender 로그 지정 -->
+	<root level="info">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+	
+</configuration>

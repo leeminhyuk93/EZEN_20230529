@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--  
+		매퍼에 대한 설정
+		namespace : 해당 매퍼의 내용을 일대일로 매칭시킬 자바의 인터페이스 클래스를 지정한다.
+-->
+<mapper namespace="com.javalab.login.dao.UserMapperInterface">
+	
+	<!-- 유저 아이디가 존재하는지 확인하는 함수 -->
+	<select id="checkIfUsernameExists" parameterType="string" resultType="string">
+		SELECT DECODE(COUNT(*), 1, 'TRUE', 'FALSE') AS "EXISTS"
+		FROM TBL_USER 
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 유저 아이디로 회원 정보를 가져오는 함수 -->
+	<select id="getUserInfoById" parameterType="string" resultType="UserVo">
+		SELECT ID, PWD, NAME, EMAIL, GENDER, ROLE_ID, TO_CHAR(JOINDATE, 'YYYY-MM-DD') AS JOINDATE 
+		FROM TBL_USER 
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 회원 정보를 데이터 베이스에 입력하는 함수 -->
+	<update id="insertUser" parameterType="UserVo">
+		INSERT INTO TBL_USER(ID, PWD, NAME, EMAIL, GENDER, ROLE_ID)  
+		VALUES(#{id}, #{pwd}, #{name}, #{email}, #{gender}, #{roleId})
+	</update>
+</mapper>
