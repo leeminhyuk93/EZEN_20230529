@@ -192,23 +192,23 @@
     </script>
 </head>
 <body>
-	<form:form id="loginForm" modelAttribute="user" action="${pageContext.request.contextPath}/login" method="post">
+	<form id="loginForm" modelAttribute="user" action="${pageContext.request.contextPath}/login" method="post">
 		<div class="container">
 			<h2>로그인</h2>
 			<div class="input_type">
 				<label for="id">아이디</label>
-				<form:input path="id" />
+				<input type="text" id="id" name="id"/>
 			</div>
 	
 	        <div class="input_type">
 				<label for="pwd">비밀번호</label>
-				<form:password path="pwd"/>
+				<input type="password" id="pwd" name="pwd"/>
 			</div>
 	
 	        <div class="button">
 	            <button type="submit" onclick="loginCheck(event);">로그인</button>
 	        </div>
 		</div>
-	</form:form>
+	</form>
 </body>
 </html>

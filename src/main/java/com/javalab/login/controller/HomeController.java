@@ -25,7 +25,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "redirect:/loginForm";
+		return "redirect:/joinForm";
 	}
 	
 	@GetMapping("/loginForm")

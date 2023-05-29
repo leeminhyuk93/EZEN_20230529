@@ -68,7 +68,7 @@ public class UserDBController {
 		
 		// 데이터베이스에 저장
 		userService.insertUser(user);
-		return "home";
+		return "login";
 	}
 	
 	@PostMapping("/login")
